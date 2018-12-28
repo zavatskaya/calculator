@@ -10,9 +10,6 @@ import UIKit
 
 class ViewController: UIViewController {
 
-   
-
-    
     
     @IBOutlet weak var displayResultLabel: UILabel!
     private var stillTyping = false
@@ -20,6 +17,7 @@ class ViewController: UIViewController {
     var firstOperand: Double = 0
     var secondOperand: Double = 0
     var operationSign: String = ""
+    var historyArray: [String] = []
     var currentInput: Double {
         get {
             return Double(displayResultLabel.text!)!
@@ -98,12 +96,23 @@ class ViewController: UIViewController {
         }
         
         switch operationSign {
-            case operations.plus.rawValue: operateWithTwoOperand {$0 + $1}
-            case operations.minus.rawValue: operateWithTwoOperand {$0 - $1}
-            case operations.multiply.rawValue: operateWithTwoOperand {$0 * $1}
-            case operations.divide.rawValue: operateWithTwoOperand {$0 / $1}
+            case operations.plus.rawValue:
+                operateWithTwoOperand {$0 + $1}
+                historyArray.append("\(firstOperand) + \(secondOperand) = \(currentInput) \n")
+            case operations.minus.rawValue:
+                operateWithTwoOperand {$0 - $1}
+                historyArray.append("\(firstOperand) - \(secondOperand) = \(currentInput) \n")
+            case operations.multiply.rawValue:
+                operateWithTwoOperand {$0 * $1}
+                historyArray.append("\(firstOperand) * \(secondOperand) = \(currentInput) \n")
+            case operations.divide.rawValue:
+                operateWithTwoOperand {$0 / $1}
+                historyArray.append("\(firstOperand) / \(secondOperand) = \(currentInput) \n")
             default: break
         }
+        
+        print(historyArray)
+        
         //TODO: Make enum
 //        switch operationSign {
 //        case "+":
@@ -153,6 +162,9 @@ class ViewController: UIViewController {
             displayResultLabel.text = "0."
         }
     }
+    
+  
+    
 }
 
 
