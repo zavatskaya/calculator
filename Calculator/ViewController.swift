@@ -10,6 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
 
+   
+
+    
+    
     @IBOutlet weak var displayResultLabel: UILabel!
     private var stillTyping = false
     private var dotIsPlaced = false
@@ -86,19 +90,33 @@ class ViewController: UIViewController {
         
         dotIsPlaced = false
         
-        
-        //TODO: Make enum
-        switch operationSign {
-        case "+":
-            operateWithTwoOperand {$0 + $1}
-        case "-":
-            operateWithTwoOperand {$0 - $1}
-        case "×":
-            operateWithTwoOperand {$0 * $1}
-        case "÷":
-            operateWithTwoOperand {$0 / $1}
-        default: break
+        enum operations: String {
+            case plus = "+"
+            case minus = "-"
+            case multiply = "×"
+            case divide = "÷"
         }
+        
+        switch operationSign {
+            case operations.plus.rawValue: operateWithTwoOperand {$0 + $1}
+            case operations.minus.rawValue: operateWithTwoOperand {$0 - $1}
+            case operations.multiply.rawValue: operateWithTwoOperand {$0 * $1}
+            case operations.divide.rawValue: operateWithTwoOperand {$0 / $1}
+            default: break
+        }
+        //TODO: Make enum
+//        switch operationSign {
+//        case "+":
+//            operateWithTwoOperand {$0 + $1}
+//        case "-":
+//            operateWithTwoOperand {$0 - $1}
+//        case "×":
+//            operateWithTwoOperand {$0 * $1}
+//        case "÷":
+//            operateWithTwoOperand {$0 / $1}
+//        default: break
+//        }
+    
     }
     
     @IBAction func clearButtonPressed(_ sender: UIButton) {
@@ -136,5 +154,6 @@ class ViewController: UIViewController {
         }
     }
 }
+
 
 
